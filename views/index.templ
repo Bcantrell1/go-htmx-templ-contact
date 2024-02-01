@@ -1,0 +1,31 @@
+package views
+
+templ Index() {
+	<div class="hero min-h-full bg-base-200">
+		<div class="hero-content gap-10 flex-col lg:flex-row-reverse">
+			<div class="text-center lg:text-left">
+				<h1 class="text-3xl md:text-5xl text-center font-bold">Testing Email with Go + HTMX!</h1>
+				<p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+			</div>
+			<div id="card" class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+				<form hx-post="/" hx-swap="outerHTML" hx-target="#card" class="card-body">
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text">Email</span>
+						</label>
+						<input type="email" name="email" placeholder="Your Email" class="input input-bordered" required />
+					</div>
+					<div class="form-control">
+						<label class="label">
+							<span class="label-text">Message</span>
+						</label>
+						<textarea name="message" class="textarea textarea-bordered" placeholder="What do you want to say?" required></textarea>
+					</div>
+					<div class="form-control mt-6">
+						<button class="btn btn-primary">Send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+}

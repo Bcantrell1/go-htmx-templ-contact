@@ -1,0 +1,15 @@
+package components
+
+templ Toast(msg bool) {
+	<div class="toast" id="toast" hx-post="/toast/remove" hx-target="#toast" hx-trigger="mouseenter" hx-swap="outerHTML" hx-on="htmx:afterSwap:console.log('Response data:', event.detail.xhr.response)">
+		if msg {
+			<div class="alert alert-success">
+				<span>Email has been Sent!</span>
+			</div>
+		} else {
+			<div class="alert alert-error">
+				<span>There was an error sending the email. Please try again later.</span>
+			</div>
+		}
+	</div>
+}
