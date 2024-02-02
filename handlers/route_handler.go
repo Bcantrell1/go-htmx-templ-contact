@@ -22,8 +22,14 @@ func ContactHandler(c echo.Context) error {
 	// Get Fields
 	email := contact["email"]
 	message := contact["message"]
-	username := GoDotEnvVariable("SMTP_USERNAME")
-	password := GoDotEnvVariable("SMTP_PASSWORD")
+
+	if _, exists := os.LookupEnv("RAILWAY_ENVIRONMENT"); exists == false {
+		if err := godotenv.Load(); err != nil {
+			log.Fatal("error loading .env file:", err)
+		}
+	}
+	username := os.Getenv("SMTP_USERNAME")
+	password := os.Getenv("SMTP_PASSWORD")
 
 	to := "to@example.com"
 	body := []byte("To: " + to + "\r\n" +
@@ -52,17 +58,4 @@ func HomeHandler(c echo.Context) error {
 
 func ToastRemover(c echo.Context) error {
 	return c.HTML(http.StatusOK, "")
-}
-
-// Utility function to get environment variables
-func GoDotEnvVariable(key string) string {
-
-	// load .env file
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatalf("Error loading .env file")
-	}
-
-	return os.Getenv(key)
 }
